@@ -1,0 +1,132 @@
+/**
+ * Write a description of class GettingIntoShape here.
+ * 
+ * @Ashwini Iyer
+ * @10/29/13
+ */
+
+
+public abstract class GeometricShape implements Comparable, AnotherComparable, Nearable
+{
+    // constants
+    public static final double EPSILON = 1.0e-5;
+    
+    private String name;
+    
+
+    /**
+     * Constructs a GeometricShape and stores the name.
+     * 
+     * @param name   the name given to the shape
+     *
+     */
+    public GeometricShape(String name)
+    {
+        this.name = name;
+    }
+    
+    /**
+     * Gets the name of the geometric shape.
+     * 
+     * @return name for the object
+     * 
+     */
+    public String getName( )
+    {
+        return this.name;
+    } 
+    
+    /**
+     * Sets the name of the geometric shape.
+     * 
+     * @param newName the name to set
+     * 
+     */
+    public void setName(String newName)
+    {
+        name = newName;
+    }
+    
+    /**
+     * Calculates the perimeter of a geometric shape.
+     * 
+     * @return returns the perimeter
+     * 
+     */
+    public abstract double getPerimeter();
+    
+    /**
+     * Retrieves the area of the shape.
+     * 
+     * @return the area of the shape
+     */
+    public abstract double getArea();
+
+    /**
+     * Determines if two numbers are within an acceptable range (EPSILON) of each other.
+     * 
+     * @param x an object to be tested
+     * 
+     * @return true if two Double objects are within an EPSILON difference of each other.
+     *         false if they are not.
+     */
+    public boolean isNearlyEqual(Object x, Object y)
+    {
+        if (x instanceof Double && y instanceof Double)
+        {
+            Double xD = (Double)x;
+            Double yD = (Double)y;
+            double diff = Math.abs(xD - yD);
+            return(diff <= (EPSILON*xD));
+        }
+        else throw new IllegalArgumentException("Needs to be a Double!");
+    }
+    
+    /**
+     * Compares the area of two objects
+     * 
+     * @param obj the object to compare against
+     * 
+     * @return 0 if the two areas are nearly equal
+     *        -1 if this object's area is smaller than the comparison object's
+     *         1 if this object's area is greater than the comparison object's
+     */
+    public int compareAnotherWay(Object obj)
+    {
+        if (obj instanceof GeometricShape)
+        {
+            Double thisArea = this.getArea();
+            Double objArea = ((GeometricShape)obj ).getArea();
+            double diff = thisArea - objArea;
+            boolean test = isNearlyEqual(thisArea,objArea);
+            if (test)
+                return 0;
+            else if (diff < 0)
+                return -1;
+            else
+                return 1;
+        }
+        else throw new IllegalArgumentException("Needs to be a GeometricShape");
+    }
+    
+    /**
+     * Determines if a geometric shape is a polygon.
+     * 
+     * @return true if the geometric shape is a polygon; otherwise false
+     */
+    public abstract boolean isPolygon();
+    
+    /**
+     * Formats information about a geometric object.
+     * 
+     * @return a formatted line about the geometric object.
+     */
+    public String toString()
+    {
+        return String.format("%-15s %-7s perimeter = %10.5f  area = %10.5f ",
+                                getClass().getName(),
+                                getName( ),
+                                getPerimeter( ),
+                                getArea( ) );
+    }
+}
