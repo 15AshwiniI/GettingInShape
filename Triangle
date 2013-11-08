@@ -1,0 +1,275 @@
+/**
+ * Write a description of class Triangle here.
+ * 
+ * @Ashwini
+ * @11/1/13
+ */
+public class Triangle extends Polygon
+{
+    public double sideA;
+    public double sideB;
+    public double sideC;
+
+    /**
+     * Constructor for objects of class Triangle
+     * 
+     * @param name the name of the Triangle
+     *        m    a side length of the triangle
+     *        n    a side length of the triangle
+     *        p    a side length of the triangle
+     */
+    public Triangle(String name, double m, double n, double p)
+    {
+        super(name);
+        orderSides(m,n,p);
+    }
+
+    /**
+     * Formats the info about the three sides of the triangle
+     * 
+     * 
+     * @return  formatted info about the 3 sides of the triangle
+     */
+    public String toString()
+    {
+       return super.toString() +
+       String.format("\n\t\t\ta = %8.5f\tb = %8.5f\tc = %8.5f\n\t\t\tregular: %b\tside count = %d",
+       getSideA(),
+       getSideB(),
+       getSideC(),
+       isRegular(),
+       numSides());
+    }
+    
+    /**
+     * Returns "Side A" of a Triangle.
+     * 
+     * @return the length of Side A
+     * 
+     */
+    public double getSideA()
+    {
+        return sideA;
+    }
+    
+    /**
+     * Returns "Side B" of a Triangle.
+     * 
+     * @return the length of Side B
+     * 
+     */
+    public double getSideB()
+    {
+        return sideB;
+    }
+    
+    /**
+     * Returns "Side C" of a Triangle.
+     * 
+     * @return the length of Side C
+     * 
+     */
+    public double getSideC()
+    {
+        return sideC;
+    }
+    
+    /**
+     * Sets "Side A" of a Triangle.
+     * 
+     * @param side the side length to set
+     */
+    public void setSideA(double side)
+    {
+        sideA = side;
+    }
+    
+    /**
+     * Sets "Side B" of a Triangle.
+     * 
+     * @param side the side length to set
+     */
+    public void setSideB(double side)
+    {
+        sideB = side;
+    }
+    
+    /**
+     * Sets "Side C" of a Triangle.
+     * 
+     * @param side the side length to set
+     */
+    public void setSideC(double side)
+    {
+        sideC = side;
+    }
+    
+    /**
+     * Returns the perimeter of the triangle.
+     * 
+     * @return the perimeter of the triangle (as a double).
+     */
+    public double getPerimeter()
+    {
+        double a = this.getSideA();
+        double b = this.getSideB();
+        double c = this.getSideC();
+        double perimeter = a + b + c;
+        return perimeter;
+    }
+        
+    /**
+     * Return the area of the triangle.
+     * 
+     * @return the area of the triangle (as a double)
+     * 
+     */
+    public double getArea()
+    {
+        double a = this.getSideA();
+        double b = this.getSideB();
+        double c = this.getSideC();
+        double s = (this.getPerimeter())/2;
+        
+        return Math.sqrt(s*(s-a)*(s-b)*(s-c));
+        
+    }
+    
+    /**
+     * Orders the sides from greatest to least, and changes the side names to match.
+     * 
+     * @param a  a single side length of the triangle to order
+     *        b  a single side length of the triangle to order
+     *        c  a single side length of the triangle to order
+     */
+    public void orderSides (double a, double b, double c)
+    {
+        double newA = Math.max(Math.max(a,b), c);
+        double newC = Math.min(Math.min(a,b), c);
+        double newB = a + b + c - newA - newC;
+        
+        if(newA >= newB + newC || newC <= 0)
+            throw new IllegalArgumentException("This is not a triangle!");
+            
+        this.setSideA(newA);
+        this.setSideB(newB);
+        this.setSideC(newC);
+    }
+    
+    /**
+     * Compares the triangle to other triangles
+     * 
+     * @return 0 if the triangles are equal
+     *         -1 if any of this triangle's side lengths are shorter than the comparison triangle's
+     *         1  if any of this triangle's side lengths are greater than the comparison triangle's
+     *         -999 if the other object is not a triangle.
+     * 
+     */
+    public int compareTo(Object obj)
+    {
+        if (obj instanceof Triangle)
+        {
+            Triangle Tri = (Triangle)(obj);
+            if (this.equals(Tri))
+                return 0;
+                
+            Double a = this.getSideA();
+            Double b = this.getSideB();
+            Double c = this.getSideC();
+            Double triA = Tri.getSideA();
+            Double triB = Tri.getSideB();
+            Double triC = Tri.getSideC();
+            
+            if (!isNearlyEqual(a,triA))
+            {
+                if (a < triA)
+                    return -1;
+                else
+                    return 1;
+            }
+            
+            if (!isNearlyEqual(b,triB))
+            {
+                if (b < triB)
+                    return -1;
+                else
+                    return 1;
+            }
+            
+            if (!isNearlyEqual(c,triC))
+            {
+                if (c < triC)
+                    return -1;
+                else
+                    return 1;
+            }
+        }
+        return -999;
+    }
+    
+    /**
+     * Checks each of this triangle's sides to be nearly equal to the
+     * corresponding side on the comparison triangle
+     * 
+     * @param obj the object to compare to
+     * 
+     * @return true if all the sides are nearly equal to the comparison triangle
+     *         false if not or if the comparison object is not a Triangle
+     */
+    public boolean equals (Object obj)
+    {
+        if (obj instanceof Triangle)
+        {
+            Triangle tri = (Triangle)(obj);
+            Double a = this.getSideA();
+            Double b = this.getSideB();
+            Double c = this.getSideC();
+            Double triA = tri.getSideA();
+            Double triB = tri.getSideB();
+            Double triC = tri.getSideC();
+            return isNearlyEqual(a, triA)  &&
+                   isNearlyEqual(b, triB)  &&
+                   isNearlyEqual(c, triC);
+        }
+        return false;
+    }
+    
+    /**
+     * Checks if the triangle is regular
+     * 
+     * @return true if all the sides are nearly equal to one another
+     *         false if not
+     * 
+     */
+    public boolean isRegular()
+    {
+        Double a = this.getSideA();
+        Double b = this.getSideB();
+        Double c = this.getSideC();
+        return isNearlyEqual(a,b)  &&
+               isNearlyEqual(b,c)  &&
+               isNearlyEqual(a,c);
+    }
+    
+    /**
+     * Returns the number of sides in a polygon
+     * 
+     * @return always 3 since all triangles have 3 sides.
+     * 
+     */
+    public int numSides()
+    {
+        return 3;
+    }
+    
+    /**
+     * Checks if the object is a Polygon
+     * 
+     * @return true everytime since all triangles are polygons
+     * 
+     */
+    public boolean isPolygon()
+    {
+        return true;
+    }
+}
