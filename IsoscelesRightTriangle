@@ -1,0 +1,61 @@
+/**
+ * An Isosceles right triangle is similar to a triangle, but two sides are equal and the other can be
+ * determined with the Pythagorean theorem.
+ * 
+ * @Ashwini
+ * @11/03/13
+ */
+public class IsoscelesRightTriangle extends Triangle
+{
+
+    /**
+     * Constructor for objects of class IsoscelesRightTriangle
+     * 
+     * @param name   names the isosceles triangle
+     * @param s      side length of the triangle's identical leg lengths
+     */
+    public IsoscelesRightTriangle(String name, double s)
+    {
+        super(name, s, s, (s*Math.sqrt(2)));
+    }
+    
+    /**
+     * Sets side A of an isosceles right triangle (the hypotenuse) and changes the legs to match.
+     * 
+     * @param hyp the hypotenuse to set
+     * 
+     */
+    public void setSideA(double hyp)
+    {
+        super.setSideA(hyp);
+        double newLeg = ((hyp*Math.sqrt(2))/2);
+        super.setSideB(newLeg);
+        super.setSideC(newLeg);
+    }
+    
+    /**
+     * Sets Side B of an isosceles right triangle and changes the hypotenuse and other leg to match.
+     * 
+     * @param leg the leg length to set
+     */
+    public void setSideB(double leg)
+    {
+        double newHyp = (leg*Math.sqrt(2));
+        super.setSideA(newHyp);
+        super.setSideB(leg);
+        super.setSideC(leg);
+    }
+    
+    /**
+     * Sets Side C of an isosceles right triangle and changes the hypotenuse and other leg to match.
+     * 
+     * @param leg the leg length to set
+     */
+    public void setSideC(double leg)
+    {
+        double newHyp = (leg*Math.sqrt(2));
+        super.setSideA(newHyp);
+        super.setSideB(leg);
+        super.setSideC(leg);
+    }
+}
