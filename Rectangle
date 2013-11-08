@@ -1,0 +1,213 @@
+/**
+ * Write a description of class Rectangle here.
+ * 
+ * @Ashwini 
+ * @11/03/13
+ */
+public class Rectangle extends Polygon
+{
+    public double length;
+    public double width;
+
+    /**
+     * Constructor for objects of class Rectangle
+     * 
+     * @param name    the name of the Rectangle
+     *        length  the length of the rectangle
+     *        width   the width of the rectangle
+     */
+    public Rectangle(String name, double l, double w)
+    {
+        super(name);
+        length = l;
+        width = w;
+    }
+    
+    /**
+     * Formats the info about the four sides of the triangle
+     * 
+     * 
+     * @return  formatted info about the 3 sides of the triangle
+     */
+    public String toString()
+    {
+       return super.toString()+
+       String.format("\n\t\t\twidth = %8.5f\tlength = %8.5f\t\n\t\tregular: %b\tside count = %d",
+       getWidth(),
+       getLength(),
+       isRegular(),
+       numSides());
+    }
+    
+    /**
+     * Returns the length of the rectangle
+     * 
+     * @return the length of the rectangle 
+     */
+    public double getLength()
+    {
+        return length;
+    }
+    
+    /**
+     * Returns the width of the rectangle
+     * 
+     * @return the width of the rectangle
+     */
+    public double getWidth()
+    {
+        return width;
+    }
+    
+    /**
+     * Sets the length of the rectangle
+     * 
+     * @param the length to set
+     */
+    public void setLength(double l)
+    {
+        length = l;
+    }
+    
+    /**
+     * Sets the width of the rectangle
+     * 
+     * @param the width to set
+     */
+    public void setWidth(double w)
+    {
+        width = w;
+    }
+    
+    /**
+     * Returns the perimeter of the rectangle.
+     * 
+     * @return the perimeter of the rectangle (as a double).
+     */
+    public double getPerimeter()
+    {
+        double l = this.getLength();
+        double w = this.getWidth();
+        double perimeter = (2*l) + (2*w);
+        return perimeter;
+    }
+    
+    /**
+     * Returns the area of the rectangle.
+     * 
+     * @return the area of the rectangle (as a double)
+     */
+    public double getArea()
+    {
+        double l = this.getLength();
+        double w = this.getWidth();
+        double area = l*w;
+        return area;
+    }
+    
+     /**
+     * Compares the rectangle to other rectangles
+     * 
+     * @return 0 if the rectangles are equal
+     *         -1 if any of this rectangle's side lengths are shorter than the comparison rectangle's
+     *         1  if any of this rectangle's side lengths are greater than the comparison rectangle's
+     *         -999 if the other object is not a rectangle.
+     * 
+     */
+    public int compareTo(Object obj)
+    {
+        if (obj instanceof Rectangle)
+        {
+            Rectangle rect = (Rectangle)(obj);
+            if (this.equals(rect))
+                return 0;
+                
+            Double l = this.getLength();
+            Double w = this.getWidth();
+            Double rectL = rect.getLength();
+            Double rectW = rect.getWidth();
+            
+            if (!isNearlyEqual(l,rectL))
+            {
+                if (l < rectL)
+                    return -1;
+                else
+                    return 1;
+            }
+            
+            if (!isNearlyEqual(w,rectW))
+            {
+                if (w < rectW)
+                    return -1;
+                else
+                    return 1;
+            }
+
+        }
+        return -999;
+    }
+    
+    /**
+     * Checks each of this rectangle's sides to be nearly equal to the
+     * corresponding side on the comparison rectangle
+     * 
+     * @param obj the object to compare to
+     * 
+     * @return true if all the sides are nearly equal to the comparison rectangle
+     *         false if not or if the comparison object is not a Rectangle
+     */
+    public boolean equals (Object obj)
+    {
+        if (obj instanceof Rectangle)
+        {
+            Rectangle rect = (Rectangle)(obj);
+            Double l = this.getLength();
+            Double w = this.getWidth();
+            Double rectL = rect.getLength();
+            Double rectW = rect.getWidth();
+            
+            return isNearlyEqual(l, rectL)  &&
+                   isNearlyEqual(w, rectW);
+        }
+        return false;
+    }
+    
+    /**
+     * Checks if the rectangle is regular
+     * 
+     * @return true if all the sides are nearly equal to one another
+     *         false if not
+     * 
+     */
+    public boolean isRegular()
+    {
+        Double l = this.getLength();
+        Double w = this.getWidth();
+        return isNearlyEqual(l,w);
+    }
+    
+    /**
+     * Returns the number of sides in a polygon
+     * 
+     * @return always 4 since all rectangles have 4 sides.
+     * 
+     */
+    public int numSides()
+    {
+        return 4;
+    }
+    
+    /**
+     * Checks if the object is a Polygon
+     * 
+     * @return true everytime since all triangles are polygons
+     * 
+     */
+    public boolean isPolygon()
+    {
+        return true;
+    }
+    
+    
+}
+
