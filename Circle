@@ -1,0 +1,155 @@
+/**
+ * Creates a circle object and analyzes it to determine its various characteristics 
+ * in comparison to other objects
+ * 
+ * @Ashwini 
+ * @10/31/13
+ */
+public class Circle extends GeometricShape
+{
+    // instance variables - replace the example below with your own
+    private double radius;
+
+    /**
+     * Constructor for objects of class Circle
+     * @param name is the name of the shape
+     * @param r is the value of the radius of the circle
+     */
+    public Circle(String name, double r)
+    {
+        super(name);
+        setRadius(r);
+    }
+
+    public double getRadius()
+    {
+        return radius;
+    }
+
+    /**
+     * Sets the length of the radius
+     * 
+     * @param r the length of the new radius and r > 0
+     * @throws IllegalArgumentException if radius is <= 0
+     */
+    public void setRadius (double r)
+    {
+        if (r <= 0)
+        {
+            throw new IllegalArgumentException("Needs to be positive");
+        }
+        radius = r;
+    }
+
+     public double getArea()
+    {
+        double r = getRadius();
+        return Math.PI * r * r;
+    }
+    
+    /**
+     * compares current cirlce with the Object obj.
+     * 
+     * @param obj  circle to compare
+     * @return 0 if the two circles 
+     */
+    public int compareTo(Object obj)
+    {
+        if (obj instanceof Circle)
+        {
+            Circle circ = (Circle)(obj);
+            double thisRad = this.getRadius();
+            double circRad = circ.getRadius();
+            if(isNearlyEqual(thisRad, circRad))
+                return 0;
+            else if (thisRad > circRad)
+                return 1;
+            else 
+                return -1;
+        }
+        else 
+            return -999;
+    }
+    
+    /**
+     * checks to see if shape is a polygon
+     * 
+     * @return false because circle's are not polygons
+     */
+
+    public boolean isPolygon()
+    {
+        return false;
+    }
+    
+    /**
+     * finds the circumference of the circle
+     * @return circumference
+     */
+    
+    public double getPerimeter()
+    {
+        return 2.0*Math.PI*getRadius();
+    }
+    
+     /**
+     * tests if the two circles have radii that are equal,
+     * within an EPSILON, which is defined in GeometricShape.
+     
+     * @param obj Circle object to test if its radius is "nearly equal" to "this" radius
+     * @return true if the radii have "nearly equal" lengths; otherwise,
+     *         false
+                  
+     */
+    
+    public boolean equals (Object obj)
+    {
+        return (this.compareTo(obj) == 0);
+    }
+    
+    /**
+     * Compares two objects in a different way than compareTo does.
+     * 
+     * @param obj  to other object 
+     * 
+     * @return  0 if two objects are sufficiently equal
+     *         >0 if "this object is determined to be greater than object or  
+     *         <0 if "this" object is determined to be less than object.
+     */
+     public int compareAnotherWay(Object obj)
+    {
+       if (obj instanceof GeometricShape)
+        {
+            Double thisArea = this.getArea();
+            Double objArea = (((GeometricShape)(obj)).getArea());
+            double diff = thisArea - objArea;
+            boolean test = isNearlyEqual(thisArea, objArea);
+            if (test)
+            {
+                return 0;
+            }
+            else if (diff < 0)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        else throw new IllegalArgumentException("Needs to be a GeometricShape");
+    }
+
+    /**
+     * Formats the class name, the circle's name, area, perimeter
+     * and radius about the circle
+     * 
+     * @return formatted information about the circle
+     */
+    
+    public String toString()
+    {
+        return super.toString() +
+        String.format("\n\t\tradius=%10.5f", this.getRadius());
+    }
+}
