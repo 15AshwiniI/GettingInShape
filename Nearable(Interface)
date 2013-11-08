@@ -1,0 +1,21 @@
+
+/**
+ * Write a description of class Nearable here.
+ * 
+ * @Ashwini 
+ * @10/31/13
+ */
+public interface Nearable
+{
+    /**
+     * Checks to see whether two objects are equal
+     * 
+     * @param Object a
+     * @param Object b
+     * @return true if both objects are equal 
+     *         false if they are not
+     */
+
+    public boolean isNearlyEqual(Object a, Object b);
+
+}
