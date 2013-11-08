@@ -1,0 +1,61 @@
+/**
+ * Write a description of class Equilateral here.
+ * 
+ * @Ashwini 
+ * @11/03/13
+ */
+public class Equilateral extends Triangle
+{
+
+    /**
+     * Constructor for objects of class EquilateralTriangle
+     * 
+     * @param name the name of the EquilateralTriangle
+     *        s    the side length of the equilateral triangle
+     *
+     */
+    public Equilateral(String name, double s)
+    {
+       super(name, s, s, s);
+    }
+    
+    
+    /**
+     * Sets the three sides of an Equilateral Triangle.
+     * 
+     * @param side the side length to set.
+     * 
+     */
+    public void setSideA(double side)
+    {
+        super.setSideA(side);
+        super.setSideB(side);
+        super.setSideC(side);
+    }
+    
+    /**
+     * Sets the three sides of an Equilateral Triangle.
+     * 
+     * @param side the side length to set.
+     * 
+     */
+    public void setSideB(double side)
+    {
+        super.setSideA(side);
+        super.setSideB(side);
+        super.setSideC(side);
+    }
+    
+    /**
+     * Sets the three sides of an Equilateral Triangle.
+     * 
+     * @param side the side length to set.
+     * 
+     */
+    public void setSideC(double side)
+    {
+        super.setSideA(side);
+        super.setSideB(side);
+        super.setSideC(side);
+    }
+}
