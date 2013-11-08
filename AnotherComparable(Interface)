@@ -1,0 +1,26 @@
+
+/**
+ * Write a description of class GettingIntoShape here.
+ * 
+ * @authorAshwini 
+ * @10/29/13
+ */
+public interface AnotherComparable
+{
+    // instance variables - replace the example below with your own
+
+    /**
+     * Compares two objects in a different way than compareTo does.
+     * 
+     * @param obj  to other object 
+     * 
+     * @return  0 if two objects are sufficiently equal
+     *         >0 if "this object is determined to be greater than object or  
+     *         <0 if "this" object is determined to be less than object.
+     */
+    
+    public abstract int compareAnotherWay(Object obj);
+   
+
+    
+}
