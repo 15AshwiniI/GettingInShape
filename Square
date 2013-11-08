@@ -1,0 +1,50 @@
+/**
+ * 
+ * @Ashwini 
+ * @11/03/13
+ */
+public class Square extends Rectangle 
+{   
+     /**
+     * Default constructor for objects of class Square. Default side length is 1
+     * 
+     * @param name the name of the square
+     */
+    public Square(String name)
+    {
+        this(name, 1.00);
+    }
+
+    /**
+     * Constructor for objects of class Square
+     * 
+     * @param name the name of the square
+     *        side the side length of the square
+     */
+    public Square(String name, double side)
+    {
+        super(name, side, side);
+    }
+    
+    /**
+     * Sets the length of the square and changes width to match.
+     * 
+     * @param l the length to set
+     */
+    public void setLength(double l)
+    {
+        super.setLength(l);
+        super.setWidth(l);
+    }
+    
+    /**
+     * Sets the width of the square and changes length to match.
+     * 
+     * @param w the width to set
+     */
+    public void setWidth(double w)
+    {
+        super.setLength(w);
+        super.setWidth(w);
+    }
+}
