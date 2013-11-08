@@ -1,0 +1,52 @@
+/**
+ * A Polygon is a GeometricShape that can be regular or irregular
+ * and has a finite number of sides
+ * 
+ * @Ashwini 
+ * @10/31/12
+ */
+public abstract class Polygon extends GeometricShape
+{
+    
+    /**
+     * Constructs a new Polygon and stores the name.
+     * 
+     * @param name the name of the polygon
+     */
+    public Polygon(String name)
+    {
+        super(name);
+    }
+
+    /**
+     * Checks if an object is a polygon
+     * 
+     * @param  obj the object to check
+     * @return     if the object is a polygon
+     */
+    public boolean isPolygon(Object obj)
+    {
+        if(obj instanceof Polygon)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Checks if a polygon is regular
+     * 
+     * @return true if the object is a regular polygon
+     * 
+     */
+    public abstract boolean isRegular();
+    
+    /**
+     * Returns the number of sides
+     * 
+     * @return the number of sides
+     * 
+     */
+    public abstract int numSides();
+    
+}
